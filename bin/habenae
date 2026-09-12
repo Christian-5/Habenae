@@ -1,0 +1,199 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DATA_DIR="$ROOT_DIR/data"
+BARE_DIR="$DATA_DIR/.bare"
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  habenae data init <repository-url> [default-branch]
+  habenae data add <branch> [start-point] [relative-path]
+  habenae data list
+  habenae data remove <relative-path>
+  habenae data prune
+  habenae doctor
+USAGE
+}
+
+fail() {
+  printf 'Error: %s\n' "$*" >&2
+  exit 1
+}
+
+require_git() {
+  command -v git >/dev/null 2>&1 || fail "git is required."
+}
+
+require_data_repository() {
+  [[ -d "$BARE_DIR" && -f "$DATA_DIR/.git" ]] ||
+    fail "the code repository is not initialized; run 'habenae data init <url>'."
+}
+
+validate_relative_path() {
+  local value="$1"
+  [[ -n "$value" ]] || fail "the path cannot be empty."
+  [[ "$value" != /* ]] || fail "the path must be relative to data/."
+  [[ "/$value/" != *"/../"* && "/$value/" != *"/./"* ]] ||
+    fail "'.' and '..' path segments are not allowed."
+  [[ "$value" != ".git" && "$value" != ".bare" && "$value" != .git/* && "$value" != .bare/* ]] ||
+    fail "this path is reserved for Git."
+}
+
+git_data() {
+  git --git-dir="$BARE_DIR" "$@"
+}
+
+data_init() {
+  local repository_url="${1:-}"
+  local requested_branch="${2:-}"
+  local branch remote_ref
+
+  [[ -n "$repository_url" ]] || fail "the code repository URL is required."
+  [[ ! -e "$DATA_DIR/.git" && ! -e "$BARE_DIR" ]] ||
+    fail "data/ already contains a Git repository."
+
+  if [[ -d "$DATA_DIR" ]] && find "$DATA_DIR" -mindepth 1 -maxdepth 1 -print -quit | grep -q .; then
+    fail "data/ must be empty before initialization."
+  fi
+
+  mkdir -p "$DATA_DIR"
+  git clone --bare "$repository_url" "$BARE_DIR"
+  printf 'gitdir: ./.bare\n' > "$DATA_DIR/.git"
+  git_data config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+  git_data fetch --prune origin
+  git_data remote set-head origin -a >/dev/null 2>&1 || true
+
+  if [[ -n "$requested_branch" ]]; then
+    branch="$requested_branch"
+  else
+    remote_ref="$(git_data symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)"
+    if [[ -n "$remote_ref" ]]; then
+      branch="${remote_ref#origin/}"
+    else
+      branch="$(git_data symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+    fi
+  fi
+
+  [[ -n "$branch" ]] || fail "the default branch could not be detected; rerun with its name as the second argument."
+  validate_relative_path "$branch"
+
+  if git_data show-ref --verify --quiet "refs/heads/$branch"; then
+    git_data worktree add "$DATA_DIR/$branch" "$branch"
+    if git_data show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+      git_data branch --set-upstream-to="origin/$branch" "$branch" >/dev/null 2>&1 || true
+    fi
+  elif git_data show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+    git_data worktree add --track -b "$branch" "$DATA_DIR/$branch" "origin/$branch"
+  else
+    fail "branch '$branch' does not exist locally or on origin."
+  fi
+
+  printf 'Code repository initialized. Worktree: data/%s\n' "$branch"
+}
+
+data_add() {
+  local branch="${1:-}"
+  local start_point="${2:-origin/HEAD}"
+  local relative_path="${3:-${1:-}}"
+  local target
+
+  [[ -n "$branch" ]] || fail "the branch name is required."
+  validate_relative_path "$relative_path"
+  target="$DATA_DIR/$relative_path"
+  [[ ! -e "$target" ]] || fail "the target already exists: data/$relative_path"
+
+  git_data fetch --prune origin
+  if git_data show-ref --verify --quiet "refs/heads/$branch"; then
+    git_data worktree add "$target" "$branch"
+  elif git_data show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+    git_data worktree add --track -b "$branch" "$target" "origin/$branch"
+  else
+    git_data rev-parse --verify --quiet "$start_point^{commit}" >/dev/null ||
+      fail "starting reference '$start_point' was not found."
+    git_data worktree add -b "$branch" "$target" "$start_point"
+  fi
+
+  printf 'Worktree created: data/%s (%s)\n' "$relative_path" "$branch"
+}
+
+data_remove() {
+  local relative_path="${1:-}"
+  [[ -n "$relative_path" ]] || fail "the relative worktree path is required."
+  validate_relative_path "$relative_path"
+  git_data worktree remove "$DATA_DIR/$relative_path"
+}
+
+doctor() {
+  local failed=0
+  require_git
+  printf 'OK  git: %s\n' "$(git --version)"
+  [[ -f "$ROOT_DIR/AGENTS.md" ]] && printf 'OK  orchestrator: AGENTS.md\n' || {
+    printf 'FAIL orchestrator is missing\n' >&2
+    failed=1
+  }
+  [[ -f "$ROOT_DIR/PROJECT.md" ]] && printf 'OK  project definition: PROJECT.md\n' || {
+    printf 'FAIL project definition is missing\n' >&2
+    failed=1
+  }
+  grep -Eq '^/data/$' "$ROOT_DIR/.gitignore" && printf 'OK  data/ is ignored\n' || {
+    printf 'FAIL data/ is not ignored\n' >&2
+    failed=1
+  }
+  if [[ -d "$BARE_DIR" || -e "$DATA_DIR/.git" ]]; then
+    require_data_repository
+    git_data fsck --no-progress >/dev/null
+    printf 'OK  code repository: data/.bare\n'
+  else
+    printf 'INFO code repository is not initialized\n'
+  fi
+  return "$failed"
+}
+
+main() {
+  require_git
+  case "${1:-}" in
+    doctor)
+      shift
+      [[ $# -eq 0 ]] || fail "doctor does not accept arguments."
+      doctor
+      ;;
+    data)
+      shift
+      case "${1:-}" in
+        init)
+          shift
+          data_init "$@"
+          ;;
+        add)
+          shift
+          require_data_repository
+          data_add "$@"
+          ;;
+        list)
+          shift
+          [[ $# -eq 0 ]] || fail "data list does not accept arguments."
+          require_data_repository
+          git_data worktree list
+          ;;
+        remove)
+          shift
+          require_data_repository
+          data_remove "$@"
+          ;;
+        prune)
+          shift
+          [[ $# -eq 0 ]] || fail "data prune does not accept arguments."
+          require_data_repository
+          git_data worktree prune --verbose
+          ;;
+        *) usage; exit 2 ;;
+      esac
+      ;;
+    -h|--help|help) usage ;;
+    *) usage; exit 2 ;;
+  esac
+}
+
+main "$@"

@@ -1,0 +1,7 @@
+# The code repository and all its worktrees are strictly local to Habenae.
+/data/
+
+# Local tool state
+/.habenae.local/
+*.log
+.DS_Store
