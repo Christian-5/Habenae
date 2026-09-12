@@ -53,6 +53,13 @@ Describe the target technical state and the behavior boundary to preserve.
 
 Planned steps, risks, and rollback strategy.
 
+## Execution log
+
+- Architecture and design:
+- Development:
+- Tests:
+- Review:
+
 ## Validation
 
 - Commands run:

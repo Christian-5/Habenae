@@ -9,6 +9,7 @@ Invoke a skill explicitly by mentioning it in the Codex prompt. For example:
 ```text
 $user-story Formalise le besoin de réinitialiser un mot de passe expiré.
 $technical-story Formalise la réorganisation du module de facturation.
+$implement-story Implémente la story courante sélectionnée.
 ```
 
 Codex may also select a skill automatically when the request matches its
@@ -48,3 +49,21 @@ produces:
 
 Feature behavior remains in user stories. An estimate of `13` signals that the
 technical work should be split before delivery.
+
+## Implementation skill
+
+The `implement-story` skill is the primary delivery entry point for an accepted
+user or technical story. It delegates lifecycle ownership to the
+`developer_orchestrator` agent, which coordinates four narrow specialists in
+order: architecture and design, development, tests, then independent review.
+
+Specialists work from context packets and return structured action and evidence
+reports. Only the orchestrator edits the Habenae story, records the execution
+trail, manages lifecycle transitions, and coordinates the independent commits
+between the product repository and Habenae. Both story templates provide a
+four-phase `Execution log` for concise specialist action summaries; detailed
+commands and acceptance evidence remain in `Validation`.
+
+The implementation skill refuses future stories, stories estimated at `13`,
+and stories whose acceptance boundary or repository state is unsafe. Newly
+added custom agents are discovered when a new Codex session starts.

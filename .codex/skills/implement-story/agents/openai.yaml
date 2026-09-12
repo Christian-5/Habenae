@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement Story"
+  short_description: "Orchestrate a story from design through review"
+  default_prompt: "Use $implement-story to implement the selected current story."

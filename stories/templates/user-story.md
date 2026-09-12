@@ -47,6 +47,13 @@ Record known product constraints without prescribing an implementation.
 
 - Relevant dependency or step.
 
+## Execution log
+
+- Architecture and design:
+- Development:
+- Tests:
+- Review:
+
 ## Validation
 
 - Commands run:
