@@ -65,6 +65,17 @@ minimal, and traceable.
 - Use `.toml.example` for templates so Codex does not register an unfinished
   placeholder as an available agent.
 
+## Codex skill definitions
+
+- Project-scoped executable skills live under `.codex/skills/<name>/`.
+- Every skill defines a stable `name` and a discriminating `description` in
+  `SKILL.md`.
+- Stories reference that `name` in their `skills` field.
+- Keep unfinished skill templates under `skills/`, outside the executable
+  discovery directory.
+- Follow [the Codex skill standard](docs/habenae/skills.md) when creating or
+  updating a skill.
+
 ## Work lifecycle
 
 - `future/`: qualified work that has not been committed to;
@@ -106,6 +117,8 @@ Work is complete when:
   instead of copying it.
 - Knowledge files use Markdown and relative links.
 - Codex custom agent definitions use TOML and live under `.codex/agents/`.
+- Executable Codex skills live under `.codex/skills/`; authoring templates live
+  under `skills/`.
 - Durable software decisions live under `docs/project/architecture/adr/`.
   Orchestrator decisions live under `docs/habenae/adr/`.
 - Recommended branch names are `feature/<id>-<slug>`, `fix/<id>-<slug>`, and

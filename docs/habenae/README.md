@@ -2,6 +2,7 @@
 
 - [Orchestrator architecture](architecture.md)
 - [Codex agent definition standard](custom-agents.md)
+- [Codex skill standard](skills.md)
 - [Worktree management](worktrees.md)
 - [Habenae decisions](adr/README.md)
 - [Glossary](glossary.md)

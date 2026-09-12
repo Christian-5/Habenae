@@ -5,6 +5,7 @@ status: future
 owners: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+story_points: null
 specifications: []
 project_adrs: []
 habenae_adrs: []
@@ -23,9 +24,10 @@ code_commit: null
 
 As a **persona**, I want **capability** so that **value**.
 
-## Context
+## Description
 
-Why does this need exist, and which constraints are already known?
+Explain the problem, its context, why it matters, and the expected behavior.
+Record known product constraints without prescribing an implementation.
 
 ## Acceptance criteria
 
@@ -35,6 +37,11 @@ Why does this need exist, and which constraints are already known?
 ## Out of scope
 
 - Explicitly excluded item.
+
+## Estimation
+
+- Story points: N
+- Rationale: Scope, complexity, uncertainty, dependencies, and validation effort.
 
 ## Plan and dependencies
 

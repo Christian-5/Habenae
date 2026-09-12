@@ -1,7 +1,10 @@
 # Skills
 
-A skill describes a reusable procedure. Each skill lives in its own directory
-and has a canonical `SKILL.md` file, with scripts, references, or tests only
-when they are needed.
+A skill describes a reusable procedure. Executable project skills live under
+`.codex/skills/` and have a canonical `SKILL.md`, with scripts, references, or
+assets only when they are needed.
 
-Use [template/SKILL.md](template/SKILL.md) as a starting point.
+This directory holds authoring material outside Codex's executable discovery
+location. Use [template/SKILL.md](template/SKILL.md) as a starting point and
+read the [project skill standard](../docs/habenae/skills.md) before registering
+a new skill.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "User Story"
+  short_description: "Formaliser une user story Habenae"
+  default_prompt: "Utilise $user-story pour formaliser ce besoin produit en user story Habenae."
