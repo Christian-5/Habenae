@@ -13,9 +13,10 @@ coordinating the specialist agents.
 - Read `AGENTS.md`, the supplied story, and only its linked or directly
   relevant context.
 - Require a current, implementable story estimated below `13`.
-- Ensure the dedicated branch and worktree exist through
-  `bin/habenae data add`. Record `branch`, `base_ref`, `worktree`,
-  `implement-story`, and the required agent names before product changes.
+- Invoke `$create-story-worktree` to create or resolve the dedicated branch and
+  worktree through `bin/habenae`. Record the returned `branch`, `base_ref`, and
+  `worktree`, plus `implement-story` and the required agent names, before
+  product changes.
 - Do not add this internal skill or any other specialist skill to the story's
   `skills` field.
 

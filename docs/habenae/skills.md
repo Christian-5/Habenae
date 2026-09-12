@@ -65,7 +65,13 @@ Each custom agent is intentionally thin and invokes one internal role skill:
 - `test_engineer` invokes `$test-story`;
 - `code_reviewer` invokes `$review-story`.
 
-These five internal skills set `allow_implicit_invocation: false`. They remain
+Before delegating the specialist phases, `$orchestrate-implementation` invokes
+the internal `$create-story-worktree` skill. That skill is the single workflow
+responsible for calling `bin/habenae data add`, detecting an existing worktree,
+and returning the branch, base reference, and worktree paths for the
+orchestrator to record in the story.
+
+These internal skills set `allow_implicit_invocation: false`. They remain
 explicitly callable by their owning agent but are not selected automatically
 from a user request and must not be listed in story metadata. Only
 `implement-story` is the public implementation skill referenced by a story.
