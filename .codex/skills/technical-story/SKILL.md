@@ -31,7 +31,7 @@ inside a refactoring story.
 
 Inspection of the product repository under `data/` is read-only at this stage.
 Do not create a worktree, change code, or begin the refactoring while drafting
-the story.
+the story. By default, see master branch
 
 ## Explain why the change matters
 
