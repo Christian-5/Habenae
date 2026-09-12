@@ -13,7 +13,7 @@ Usage:
   habenae product list
   habenae product remove <relative-path>
   habenae product prune
-  habenae doctor
+  habenae doctor [--knowledge]
 USAGE
 }
 
@@ -126,6 +126,7 @@ product_remove() {
 }
 
 doctor() {
+  local run_knowledge="${1:-0}"
   local failed=0
   require_git
   printf 'OK  git: %s\n' "$(git --version)"
@@ -148,6 +149,10 @@ doctor() {
   else
     printf 'INFO code repository is not initialized\n'
   fi
+  if [[ "$run_knowledge" -eq 1 ]]; then
+    command -v python3 >/dev/null 2>&1 || fail "python3 is required for 'doctor --knowledge'."
+    python3 "$ROOT_DIR/bin/habenae_knowledge.py" --root "$ROOT_DIR" || failed=1
+  fi
   return "$failed"
 }
 
@@ -156,8 +161,13 @@ main() {
   case "${1:-}" in
     doctor)
       shift
-      [[ $# -eq 0 ]] || fail "doctor does not accept arguments."
-      doctor
+      local run_knowledge=0
+      if [[ "${1:-}" == "--knowledge" ]]; then
+        run_knowledge=1
+        shift
+      fi
+      [[ $# -eq 0 ]] || fail "doctor accepts only an optional --knowledge flag."
+      doctor "$run_knowledge"
       ;;
     product)
       shift

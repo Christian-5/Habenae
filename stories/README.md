@@ -18,7 +18,15 @@ Its identifier and filename remain stable when its state changes.
 The `agents` frontmatter field lists the `name` values of custom Codex agents
 defined under `.codex/agents/` according to the
 [agent definition standard](../docs/habenae/custom-agents.md). The `skills`
-field lists the reusable skills required by the story.
+field lists the reusable skills required by the story; it never names an
+internal skill (see [docs/habenae/skills.md](../docs/habenae/skills.md)). The
+`specifications`, `project_adrs`, and `habenae_adrs` fields hold
+repository-relative paths to the linked files, for example
+`docs/habenae/adr/0001-separate-orchestration-and-code.md`.
+
+`./bin/habenae doctor --knowledge` mechanically checks that every one of these
+references resolves and that story identifiers are unique; see
+[docs/habenae/worktrees.md](../docs/habenae/worktrees.md#check-the-knowledge-graph).
 
 Templates:
 

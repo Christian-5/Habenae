@@ -1,2 +1,7 @@
 policy:
   allow_implicit_invocation: false
+
+interface:
+  display_name: "Orchestrate Implementation"
+  short_description: "Run an accepted story's implementation lifecycle directly"
+  default_prompt: "Use $orchestrate-implementation to coordinate this accepted story's design, development, tests, and review."

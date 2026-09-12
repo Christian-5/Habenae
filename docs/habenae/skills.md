@@ -54,8 +54,17 @@ technical work should be split before delivery.
 
 The `implement-story` skill is the primary delivery entry point for an accepted
 user or technical story. It delegates lifecycle ownership to the
-`developer_orchestrator` agent, which coordinates four narrow specialists in
-order: architecture and design, development, tests, then independent review.
+`developer_orchestrator` agent, which coordinates up to four narrow
+specialists in order — architecture and design, development, tests, then
+independent review — scaled to the story's `story_points` estimate:
+
+- `1`: the orchestrator implements and tests the change directly, then still
+  requires an independent review;
+- `2` or `3`: skips the design specialist, since the scope is already
+  understood at this size;
+- `5` or `8`: runs all four specialists.
+
+Independent review by `code_reviewer` always runs, regardless of estimate.
 
 Each custom agent is intentionally thin and invokes one internal role skill:
 
@@ -79,6 +88,13 @@ These internal skills set `allow_implicit_invocation: false`. They remain
 explicitly callable by their owning agent but are not selected automatically
 from a user request and must not be listed in story metadata. Only
 `implement-story` is the public implementation skill referenced by a story.
+
+`orchestrate-implementation` additionally declares an `interface` block so it
+is nameable from the Codex interface as `$orchestrate-implementation`, for
+running an already-qualified story's lifecycle directly without going through
+`implement-story`'s story-resolution step. It stays internal in every other
+respect: `allow_implicit_invocation: false`, not selected automatically, and
+never listed in a story's `skills` field.
 
 Specialists work from context packets and return structured action and evidence
 reports. Only the orchestrator edits the Habenae story, records the execution

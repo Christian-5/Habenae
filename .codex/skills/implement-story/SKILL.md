@@ -35,18 +35,27 @@ Provide a compact context packet containing:
 - the repository, base reference, branch, and worktree fields;
 - relevant user decisions and current repository-state observations.
 
+Pass paths, not pasted file content — `developer_orchestrator` and its
+specialists read what they need directly — and list this stable material
+before anything specific to this delegation.
+
 The `developer_orchestrator` loads its private `$orchestrate-implementation`
-skill. Require it to use the four specialist agents named below and to return
-the final delivery report:
+skill. Require it to draw from the specialist agents named below, scaled to
+the story's `story_points` estimate, and to return the final delivery report:
 
-1. `architecture_designer`, which loads `$design-story`;
-2. `software_developer`, which loads `$develop-story`;
-3. `test_engineer`, which loads `$test-story`;
-4. `code_reviewer`, which loads `$review-story`.
+1. `architecture_designer`, which loads `$design-story` — stories of `5` or
+   `8` points only;
+2. `software_developer`, which loads `$develop-story` — stories of `2` points
+   or more; the orchestrator implements directly for a `1`-point story;
+3. `test_engineer`, which loads `$test-story` — stories of `2` points or more;
+   covered by the direct implementation for a `1`-point story;
+4. `code_reviewer`, which loads `$review-story` — every story, regardless of
+   estimate.
 
-The phases are ordered. A specialist may be recalled with a narrowly scoped
-correction, but no phase is skipped silently. Only the orchestrator updates the
-Habenae story; specialists report their actions and evidence to it.
+The phases run in order for the applicable tier; no required phase is skipped
+silently, and `code_reviewer` always runs. A specialist may be recalled with a
+narrowly scoped correction. Only the orchestrator updates the Habenae story;
+specialists report their actions and evidence to it.
 These internal skills are execution details: do not add them to the story's
 `skills` field.
 

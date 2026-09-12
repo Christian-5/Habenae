@@ -50,3 +50,19 @@ different path relative to `product/`:
 `remove` uses `git worktree remove` without forcing it, so Git refuses to remove
 a worktree with uncommitted changes. Do not delete a worktree directly with
 `rm -rf`.
+
+## Check the knowledge graph
+
+```bash
+./bin/habenae doctor --knowledge
+```
+
+This runs `bin/habenae_knowledge.py` (requires Python 3) and mechanically
+verifies invariants that would otherwise depend only on an agent's discipline:
+unique agent, skill, and ADR identifiers; story, agent, and skill references
+that all resolve to an existing definition; internal skills absent from every
+story's `skills` field; unfinished agent or skill templates registered as if
+they were complete; and mutually consistent ADR `supersedes`/`superseded_by`
+links. It exits non-zero and reports every violation on failure, and prints an
+`INFO` line for an agent or skill that no story or `docs/habenae/` page
+references yet. See [ADR-0006](adr/0006-check-knowledge-graph-mechanically.md).

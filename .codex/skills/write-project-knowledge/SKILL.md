@@ -9,7 +9,10 @@ Write only the artifact required by the orchestrator:
 
 - **Documentation** under `docs/project/` describes the product's current,
   valid behavior or architecture. Keep it task-oriented, concise, and aligned
-  with the verified implementation.
+  with the verified implementation. Record a newly verified coding or test
+  convention in `docs/project/documentation/conventions.md` or `testing.md`
+  under its existing heading, replacing any statement it supersedes rather
+  than accumulating both.
 - **Specification** under `specifications/` defines expected product behavior
   independently of its implementation. State scope, rules, constraints, and
   verifiable outcomes; link the related story and ADRs.
