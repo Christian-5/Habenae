@@ -57,6 +57,19 @@ user or technical story. It delegates lifecycle ownership to the
 `developer_orchestrator` agent, which coordinates four narrow specialists in
 order: architecture and design, development, tests, then independent review.
 
+Each custom agent is intentionally thin and invokes one internal role skill:
+
+- `developer_orchestrator` invokes `$orchestrate-implementation`;
+- `architecture_designer` invokes `$design-story`;
+- `software_developer` invokes `$develop-story`;
+- `test_engineer` invokes `$test-story`;
+- `code_reviewer` invokes `$review-story`.
+
+These five internal skills set `allow_implicit_invocation: false`. They remain
+explicitly callable by their owning agent but are not selected automatically
+from a user request and must not be listed in story metadata. Only
+`implement-story` is the public implementation skill referenced by a story.
+
 Specialists work from context packets and return structured action and evidence
 reports. Only the orchestrator edits the Habenae story, records the execution
 trail, manages lifecycle transitions, and coordinates the independent commits

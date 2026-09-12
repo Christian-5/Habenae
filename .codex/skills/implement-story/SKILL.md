@@ -35,17 +35,20 @@ Provide a compact context packet containing:
 - the repository, base reference, branch, and worktree fields;
 - relevant user decisions and current repository-state observations.
 
-Require the orchestrator to use the four specialist agents named below and to
-return the final delivery report:
+The `developer_orchestrator` loads its private `$orchestrate-implementation`
+skill. Require it to use the four specialist agents named below and to return
+the final delivery report:
 
-1. `architecture_designer` for analysis and an implementation design;
-2. `software_developer` for the scoped production change;
-3. `test_engineer` for tests and acceptance evidence;
-4. `code_reviewer` for an independent, read-only review.
+1. `architecture_designer`, which loads `$design-story`;
+2. `software_developer`, which loads `$develop-story`;
+3. `test_engineer`, which loads `$test-story`;
+4. `code_reviewer`, which loads `$review-story`.
 
 The phases are ordered. A specialist may be recalled with a narrowly scoped
 correction, but no phase is skipped silently. Only the orchestrator updates the
 Habenae story; specialists report their actions and evidence to it.
+These internal skills are execution details: do not add them to the story's
+`skills` field.
 
 ## Preserve repository boundaries
 
