@@ -67,7 +67,7 @@ Each custom agent is intentionally thin and invokes one internal role skill:
 
 Before delegating the specialist phases, `$orchestrate-implementation` invokes
 the internal `$create-story-worktree` skill. The orchestrator chooses the
-arguments; the skill only runs `bin/habenae data add` and returns its result.
+arguments; the skill only runs `bin/habenae product add` and returns its result.
 
 The orchestrator invokes `$write-project-knowledge` when a story requires
 product documentation, a specification, or a project ADR. This internal skill

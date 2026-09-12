@@ -4,7 +4,7 @@ Habenae is an orchestration workspace for agentic software development. It keeps
 working knowledge—agents, skills, specifications, stories, documentation, and
 decisions—in a Git repository separate from the application code.
 
-Source code lives under `data/`. This directory is a local container for Git
+Product source code lives under `product/`. This directory is a local container for Git
 worktrees and is never versioned by the Habenae repository.
 
 ## Quick start
@@ -14,9 +14,9 @@ git init
 git add .
 git commit -m "chore: initialize Habenae"
 
-./bin/habenae data init <code-repository-url>
-./bin/habenae data add feature/my-story
-./bin/habenae data list
+./bin/habenae product init <code-repository-url>
+./bin/habenae product add feature/my-story
+./bin/habenae product list
 ```
 
 After initializing the code repository, the tree looks like this:
@@ -36,7 +36,7 @@ Habenae/
 │   ├── habenae/            # orchestrator architecture and ADRs
 │   └── project/            # software documentation and architecture
 ├── bin/habenae             # code repository management
-└── data/                   # ignored by Habenae Git
+└── product/                # ignored by Habenae Git
     ├── .bare/              # shared Git history for the code
     ├── .git                # pointer to .bare
     ├── main/               # main branch worktree

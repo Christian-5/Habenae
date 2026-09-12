@@ -8,4 +8,4 @@
 - [Glossary](glossary.md)
 
 This domain documents the agentic control plane. It contains neither the
-functional documentation nor the architecture of the software under `data/`.
+functional documentation nor the architecture of the software under `product/`.

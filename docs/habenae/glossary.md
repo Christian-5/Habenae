@@ -6,4 +6,5 @@
 - **Story**: unit of value or work with verifiable criteria.
 - **Worktree**: Git working directory associated with a single branch.
 - **Control plane**: knowledge and orchestration maintained by Habenae.
-- **Data plane**: product code, independent from agentic orchestration.
+- **Product repository**: product code and its Git worktrees, independent from
+  agentic orchestration.

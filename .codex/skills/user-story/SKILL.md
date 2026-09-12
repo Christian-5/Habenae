@@ -18,7 +18,7 @@ begins.
 4. Read only specifications or decisions directly relevant to the expressed
    need.
 
-Do not inspect or modify the product repository under `data/`. Creating a story
+Do not inspect or modify the product repository under `product/`. Creating a story
 does not authorize implementation.
 
 ## Shape the story
@@ -91,7 +91,7 @@ Before finishing, verify that:
   sections contain no template placeholders;
 - every acceptance criterion can be checked without interpreting vague terms;
 - the story-point value uses the documented scale and has a rationale;
-- no file under `data/` changed.
+- no file under `product/` changed.
 
 Return the story path, its identifier, its estimate, and any assumptions or
 open decisions. Do not begin implementation.

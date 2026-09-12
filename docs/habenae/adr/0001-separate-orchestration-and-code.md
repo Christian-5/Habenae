@@ -4,7 +4,7 @@ status: accepted
 date: 2026-09-12
 owners: []
 supersedes: []
-superseded_by: null
+superseded_by: ADR-0004
 ---
 
 # Separate agentic orchestration from product code

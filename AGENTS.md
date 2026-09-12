@@ -11,19 +11,19 @@ Turn product intent into a traceable software change:
 1. understand the request and its constraints;
 2. find or create the corresponding story;
 3. load the relevant specifications, ADRs, skills, and agents;
-4. work in a dedicated worktree under `data/`;
+4. work in a dedicated worktree under `product/`;
 5. verify the result;
 6. update the knowledge base and Git references.
 
 ## Boundary between the two repositories
 
 - The **Habenae** repository contains orchestration and knowledge only.
-- The **code** repository is installed locally under `data/` with its own Git
+- The **product** repository is installed locally under `product/` with its own Git
   history.
-- `data/` must never be added to the Habenae repository, including as a
+- `product/` must never be added to the Habenae repository, including as a
   submodule.
 - No agentic file (`AGENTS.md`, `CLAUDE.md`, skills, prompts, or agent memory)
-  may be created in the worktrees under `data/`.
+  may be created in the worktrees under `product/`.
 - A story references code through `worktree`, `branch`, `base_ref`, and commit
   SHA fields. Commits in the two repositories are independent.
 
@@ -91,7 +91,7 @@ references (`code_commit`, decisions, and documentation) are up to date.
 For every change:
 
 1. assign a stable identifier (`US-####` or `TS-####`);
-2. choose a dedicated branch and create it with `bin/habenae data add`;
+2. choose a dedicated branch and create it with `bin/habenae product add`;
 3. record the worktree path in the story;
 4. apply existing ADRs or propose one in the relevant domain registry when the
    decision is structural;

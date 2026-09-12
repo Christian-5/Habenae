@@ -26,13 +26,13 @@ cp "$PROJECT_ROOT/.gitignore" "$COPY/.gitignore"
 chmod +x "$COPY/bin/habenae"
 
 "$COPY/bin/habenae" doctor >/dev/null
-"$COPY/bin/habenae" data init "$REMOTE" main >/dev/null
-[[ -f "$COPY/data/main/README.md" ]]
-"$COPY/bin/habenae" data add feature/TS-0001 origin/main >/dev/null
-[[ -f "$COPY/data/feature/TS-0001/README.md" ]]
-"$COPY/bin/habenae" data list | grep -q 'feature/TS-0001'
-"$COPY/bin/habenae" data remove feature/TS-0001
-[[ ! -e "$COPY/data/feature/TS-0001" ]]
+"$COPY/bin/habenae" product init "$REMOTE" main >/dev/null
+[[ -f "$COPY/product/main/README.md" ]]
+"$COPY/bin/habenae" product add feature/TS-0001 origin/main >/dev/null
+[[ -f "$COPY/product/feature/TS-0001/README.md" ]]
+"$COPY/bin/habenae" product list | grep -q 'feature/TS-0001'
+"$COPY/bin/habenae" product remove feature/TS-0001
+[[ ! -e "$COPY/product/feature/TS-0001" ]]
 "$COPY/bin/habenae" doctor >/dev/null
 
 printf 'habenae-cli: OK\n'

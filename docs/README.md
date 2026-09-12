@@ -4,7 +4,7 @@ Documentation is divided into two strictly separate domains:
 
 - [Habenae](habenae/README.md) describes the orchestrator, its architecture,
   worktrees, and decisions;
-- [Project](project/README.md) describes the software developed under `data/`,
+- [Project](project/README.md) describes the software developed under `product/`,
   including its behavior, architecture, and decisions.
 
 A page belongs to exactly one domain. When a topic crosses the boundary, each

@@ -1,5 +1,5 @@
 # The code repository and all its worktrees are strictly local to Habenae.
-/data/
+/product/
 
 # Local tool state
 /.habenae.local/

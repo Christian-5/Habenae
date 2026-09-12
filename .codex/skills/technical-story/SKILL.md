@@ -29,7 +29,7 @@ inside a refactoring story.
 4. Read only the project specifications, ADRs, documentation, and product code
    needed to understand the affected area and existing constraints.
 
-Inspection of the product repository under `data/` is read-only at this stage.
+Inspection of the product repository under `product/` is read-only at this stage.
 Do not create a worktree, change code, or begin the refactoring while drafting
 the story. By default, see master branch
 
@@ -116,7 +116,7 @@ Before finishing, verify that:
   is clear;
 - every acceptance criterion has observable evidence;
 - the estimate uses the documented scale and has a rationale;
-- no file under `data/` changed.
+- no file under `product/` changed.
 
 Return the story path, identifier, estimate, affected technical area, and any
 assumptions or open decisions. Do not begin implementation.

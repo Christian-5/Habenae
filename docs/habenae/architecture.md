@@ -6,7 +6,7 @@ Habenae deliberately separates:
 
 1. the **control plane**, this repository, which describes what to do, why, and
    how;
-2. the **data plane**, under `data/`, which contains only the product code.
+2. the **product repository**, under `product/`, which contains only the product code.
 
 This separation keeps conventions tied to a particular agent out of the
 application repository. It also makes it possible to change orchestrators
@@ -14,15 +14,15 @@ without rewriting the product history.
 
 ## Git model
 
-The Habenae repository is a normal Git repository. `data/` is ignored.
+The Habenae repository is a normal Git repository. `product/` is ignored.
 
 The code repository uses a shared bare clone:
 
 ```text
-data/.bare             shared Git history, references, and configuration
-data/.git              file containing "gitdir: ./.bare"
-data/main              main branch worktree
-data/feature/<name>    feature branch worktree
+product/.bare             shared Git history, references, and configuration
+product/.git              file containing "gitdir: ./.bare"
+product/main              main branch worktree
+product/feature/<name>    feature branch worktree
 ```
 
 All worktrees share the objects, references, and hooks from the bare repository.

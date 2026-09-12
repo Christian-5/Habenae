@@ -53,10 +53,10 @@ These internal skills are execution details: do not add them to the story's
 ## Preserve repository boundaries
 
 - Habenae contains orchestration and story evidence; product changes belong
-  only in the worktree under `data/` declared by the story.
-- Use `bin/habenae data add` to create a missing dedicated worktree and record
+  only in the worktree under `product/` declared by the story.
+- Use `bin/habenae product add` to create a missing dedicated worktree and record
   its branch, base reference, and path before product code changes.
-- Never place agentic files in `data/` and never add `data/` to Habenae Git.
+- Never place agentic files in `product/` and never add `product/` to Habenae Git.
 - Preserve unrelated changes. Stop before overwriting ambiguous or conflicting
   user work.
 - Commit product code first. Record that SHA in the story, then commit the

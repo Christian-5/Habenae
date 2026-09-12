@@ -9,7 +9,7 @@ Receive `branch`, `base_ref`, and optionally `relative_path` from the
 orchestrator. Create the worktree with:
 
 ```text
-bin/habenae data add <branch> <base_ref> [relative_path]
+bin/habenae product add <branch> <base_ref> [relative_path]
 ```
 
 Do not choose the values, edit the story, or modify product code. Return the
