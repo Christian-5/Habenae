@@ -69,6 +69,12 @@ Before delegating the specialist phases, `$orchestrate-implementation` invokes
 the internal `$create-story-worktree` skill. The orchestrator chooses the
 arguments; the skill only runs `bin/habenae data add` and returns its result.
 
+The orchestrator invokes `$write-project-knowledge` when a story requires
+product documentation, a specification, or a project ADR. This internal skill
+keeps the three artifacts distinct: documentation describes the verified
+current state, specifications define expected behavior independently of code,
+and ADRs preserve durable architectural decisions and their consequences.
+
 These internal skills set `allow_implicit_invocation: false`. They remain
 explicitly callable by their owning agent but are not selected automatically
 from a user request and must not be listed in story metadata. Only
