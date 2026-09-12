@@ -18,6 +18,14 @@ git -C "$SOURCE" add README.md
 git -C "$SOURCE" commit -m initial >/dev/null
 git clone --bare "$SOURCE" "$REMOTE" >/dev/null
 
+git -C "$COPY" init -b master >/dev/null
+git -C "$COPY" config user.name Test
+git -C "$COPY" config user.email test@example.invalid
+printf 'harness\n' > "$COPY/HISTORY.md"
+git -C "$COPY" add HISTORY.md
+git -C "$COPY" commit -m harness >/dev/null
+git -C "$COPY" remote add origin "$REMOTE"
+
 mkdir -p "$COPY/bin"
 cp "$PROJECT_ROOT/bin/habenae" "$COPY/bin/habenae"
 cp "$PROJECT_ROOT/AGENTS.md" "$COPY/AGENTS.md"
@@ -34,5 +42,9 @@ chmod +x "$COPY/bin/habenae"
 "$COPY/bin/habenae" product remove feature/TS-0001
 [[ ! -e "$COPY/product/feature/TS-0001" ]]
 "$COPY/bin/habenae" doctor >/dev/null
+
+git -C "$COPY" branch -m master project
+"$COPY/bin/habenae" harness rebase "$REMOTE" main >/dev/null
+[[ -f "$COPY/README.md" && -f "$COPY/HISTORY.md" ]]
 
 printf 'habenae-cli: OK\n'

@@ -4,6 +4,7 @@
 - [Codex agent definition standard](custom-agents.md)
 - [Codex skill standard](skills.md)
 - [Worktree management](worktrees.md)
+- [Rebasing a project history](rebase-project-history.md)
 - [Habenae decisions](adr/README.md)
 - [Glossary](glossary.md)
 
