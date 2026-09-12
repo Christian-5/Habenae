@@ -66,10 +66,8 @@ Each custom agent is intentionally thin and invokes one internal role skill:
 - `code_reviewer` invokes `$review-story`.
 
 Before delegating the specialist phases, `$orchestrate-implementation` invokes
-the internal `$create-story-worktree` skill. That skill is the single workflow
-responsible for calling `bin/habenae data add`, detecting an existing worktree,
-and returning the branch, base reference, and worktree paths for the
-orchestrator to record in the story.
+the internal `$create-story-worktree` skill. The orchestrator chooses the
+arguments; the skill only runs `bin/habenae data add` and returns its result.
 
 These internal skills set `allow_implicit_invocation: false`. They remain
 explicitly callable by their owning agent but are not selected automatically
