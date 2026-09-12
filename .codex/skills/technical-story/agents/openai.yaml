@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Story"
+  short_description: "Formaliser une technical story Habenae"
+  default_prompt: "Utilise $technical-story pour formaliser ce besoin de refactoring ou de réorganisation."

@@ -6,6 +6,7 @@ owners: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 motivation: null
+story_points: null
 specifications: []
 project_adrs: []
 habenae_adrs: []
@@ -20,9 +21,14 @@ code_commit: null
 
 # TS-0000 — Short title
 
+## Description
+
+Describe the current technical state, the concrete friction or risk it creates,
+why the change matters now, and which future development becomes simpler.
+
 ## Expected technical outcome
 
-Describe the target technical state and the reason for this change.
+Describe the target technical state and the behavior boundary to preserve.
 
 ## Constraints
 
@@ -36,6 +42,12 @@ Describe the target technical state and the reason for this change.
 ## Out of scope
 
 - Explicitly excluded item.
+
+## Estimation
+
+- Story points: N
+- Rationale: Affected surface, coupling, migration risk, uncertainty,
+  dependencies, and validation effort.
 
 ## Approach
 
