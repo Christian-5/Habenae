@@ -8,6 +8,9 @@ description: Internal Habenae workflow for producing the architecture and implem
 Translate the supplied accepted story into an evidence-based technical design
 that a developer can implement safely.
 
+- Read `docs/project/architecture.md` before inspecting the product code. Treat
+  it as the entry point for the product architecture and follow its references
+  that are relevant to the story.
 - Use the story, acceptance criteria, exclusions, linked specifications and
   ADRs, and declared product worktree as the context boundary.
 - Inspect only relevant product code and documentation.

@@ -8,6 +8,9 @@ description: Internal Habenae workflow for implementing an approved story design
 Implement the supplied approved design within the declared product-code
 worktree.
 
+- Read `docs/project/architecture.md` before modifying product code. Ensure the
+  implementation follows the documented product architecture and report any
+  conflict with the approved design to the orchestrator.
 - Read only the code and documentation required by the assigned design,
   acceptance criteria, exclusions, and relevant project guidance.
 - Make the smallest coherent production-code and directly required
