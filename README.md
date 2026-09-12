@@ -30,7 +30,7 @@ Habenae/
 ├── .codex/
 │   └── agents/             # project-scoped Codex agent definitions
 ├── skills/                 # reusable procedures
-├── specifications/         # current, future, past
+├── specifications/         # product specifications
 ├── stories/                # user stories and technical stories
 ├── docs/
 │   ├── habenae/            # orchestrator architecture and ADRs

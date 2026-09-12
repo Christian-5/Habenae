@@ -8,5 +8,5 @@ This section contains software documentation other than architecture decisions:
 - diagnostic procedures;
 - stable technical references.
 
-Documentation describes the current valid state. A future change remains under
-`specifications/future/` until it is adopted.
+Documentation describes the current valid state. A future change remains a
+specification until it is adopted.

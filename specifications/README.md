@@ -3,9 +3,8 @@
 Specifications describe expected product behavior independently of a particular
 implementation.
 
-- `future/` contains proposed changes;
-- `current/` describes the currently expected contract;
-- `past/` retains removed or superseded specifications.
+The lifecycle of a specification is tracked through its linked story. The
+directory currently contains no product specification files beyond this index.
 
 Each specification has a stable identifier, links to its stories, and, when
 needed, links to the constraining project ADRs under
