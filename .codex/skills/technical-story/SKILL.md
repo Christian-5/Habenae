@@ -22,8 +22,9 @@ inside a refactoring story.
 ## Load only the required context
 
 1. Read `AGENTS.md`, then `PROJECT.md`.
-2. Read `stories/README.md` and `stories/templates/technical-story.md`.
-3. Search story identifiers and titles across `stories/future/`,
+2. Read `stories/README.md`, `stories/templates/technical-story.md`, and
+   `stories/templates/collaboration.md`.
+3. Search story identifiers and titles recursively across `stories/future/`,
    `stories/current/`, and `stories/past/` to find the next identifier and
    possible duplicates.
 4. Read only the project specifications, ADRs, documentation, and product code
@@ -87,17 +88,19 @@ For a new technical story:
 
 1. Allocate the next unused `TS-####` identifier across every lifecycle
    directory.
-2. Use a short lowercase hyphenated filename slug.
-3. Copy `stories/templates/technical-story.md` and populate every relevant
-   field.
-4. Default to `stories/future/technical/` and `status: future`. Use
+2. Create a directory named `TS-####-short-lowercase-slug`.
+3. Copy the technical-story template to `<story-directory>/story.md`, populate
+   every relevant field, and copy the collaboration template to
+   `<story-directory>/collaboration.md`.
+4. Default the directory to `stories/future/technical/` and `status: future`. Use
    `stories/current/technical/` only when the user explicitly accepts or starts
    the work.
 5. Leave branch, worktree, and commit fields `null`; execution references are
    populated only when implementation begins.
 
-When refining an existing story, preserve its identifier and lifecycle. Change
-only fields supported by the request or required for internal consistency.
+When refining an existing story, preserve its identifier, directory name,
+lifecycle, and collaboration journal. Change only fields supported by the
+request or required for internal consistency.
 
 Link only specifications, ADRs, agents, and skills that exist and materially
 affect the work. Propose a project ADR when the target introduces or changes a
@@ -108,7 +111,8 @@ the user also requests it.
 
 Before finishing, verify that:
 
-- the identifier is unique and matches the heading and filename;
+- the identifier is unique and matches the heading and story-directory name;
+- the directory contains both `story.md` and `collaboration.md`;
 - frontmatter dates, lifecycle status, and `motivation` are consistent;
 - Description, Expected technical outcome, Constraints, Acceptance criteria,
   Out of scope, Approach, and Estimation contain no template placeholders;
@@ -118,5 +122,6 @@ Before finishing, verify that:
 - the estimate uses the documented scale and has a rationale;
 - no file under `product/` changed.
 
-Return the story path, identifier, estimate, affected technical area, and any
-assumptions or open decisions. Do not begin implementation.
+Return the story-directory path, `story.md` path, identifier, estimate,
+affected technical area, and any assumptions or open decisions. Do not begin
+implementation.

@@ -41,7 +41,8 @@ Turn product intent into a traceable software change:
 
 1. `AGENTS.md`;
 2. `PROJECT.md`;
-3. the active story under `stories/current/`;
+3. the active story's `story.md` and `collaboration.md` under
+   `stories/current/`;
 4. linked specifications under `specifications/`;
 5. relevant project ADRs under `docs/project/architecture/adr/` and, when the
    work affects orchestration, those under `docs/habenae/adr/`;
@@ -82,9 +83,11 @@ minimal, and traceable.
 - `current/`: accepted or in-progress work;
 - `past/`: completed, abandoned, or superseded work kept for history.
 
-A story moves from `future` to `current` before any code is changed. It moves to
-`past` only after its acceptance criteria have been verified and its final
-references (`code_commit`, decisions, and documentation) are up to date.
+A story directory moves from `future` to `current` before any code is changed.
+It moves to `past` only after its acceptance criteria have been verified and
+its final references (`code_commit`, decisions, and documentation) are up to
+date. Move the whole directory and retain its `collaboration.md` as durable
+implementation history.
 
 ## Execution contract
 
@@ -109,6 +112,7 @@ Work is complete when:
 - no sensitive data or local artifacts are versioned;
 - related documentation and ADRs are consistent;
 - the story contains evidence references and the code commit;
+- its agent collaboration journal is retained with the story directory;
 - the worktree can be removed without losing work.
 
 ## Conventions

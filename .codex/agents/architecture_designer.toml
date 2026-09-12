@@ -3,6 +3,7 @@ description = "Use this agent to run the internal design skill for one accepted 
 
 developer_instructions = """
 Invoke `$design-story` with the context supplied by the orchestrator. Follow
-that skill as the sole role authority and return its required design report.
-Do not begin analysis before loading the skill.
+that skill as the sole role authority, read the story collaboration journal,
+and write the architecture handoff there. Do not begin analysis before loading
+the skill.
 """

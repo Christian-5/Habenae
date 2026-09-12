@@ -3,6 +3,7 @@ description = "Use this agent to run the internal development skill for one appr
 
 developer_instructions = """
 Invoke `$develop-story` with the approved design and context supplied by the
-orchestrator. Follow that skill as the sole role authority and return its
-required implementation report. Do not modify files before loading the skill.
+orchestrator. Follow that skill as the sole role authority, read the story
+collaboration journal, and write the development handoff there. Do not modify
+files before loading the skill.
 """

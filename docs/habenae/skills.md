@@ -74,6 +74,13 @@ Each custom agent is intentionally thin and invokes one internal role skill:
 - `test_engineer` invokes `$test-story`;
 - `code_reviewer` invokes `$review-story`.
 
+Each story is a directory containing normative `story.md` and a durable
+`collaboration.md`. Specialists read earlier journal entries and write only
+their own Architecture, Development, Tests, or Review section. Only the
+orchestrator edits `story.md`, manages lifecycle transitions, and coordinates
+the independent commits between the product repository and Habenae. The whole
+story directory, including the collaboration journal, is retained in `past/`.
+
 Before delegating the specialist phases, `$orchestrate-implementation` invokes
 the internal `$create-story-worktree` skill. The orchestrator chooses the
 arguments; the skill only runs `bin/habenae product add` and returns its result.
@@ -95,13 +102,6 @@ running an already-qualified story's lifecycle directly without going through
 `implement-story`'s story-resolution step. It stays internal in every other
 respect: `allow_implicit_invocation: false`, not selected automatically, and
 never listed in a story's `skills` field.
-
-Specialists work from context packets and return structured action and evidence
-reports. Only the orchestrator edits the Habenae story, records the execution
-trail, manages lifecycle transitions, and coordinates the independent commits
-between the product repository and Habenae. Both story templates provide a
-four-phase `Execution log` for concise specialist action summaries; detailed
-commands and acceptance evidence remain in `Validation`.
 
 The implementation skill refuses future stories, stories estimated at `13`,
 and stories whose acceptance boundary or repository state is unsafe. Newly

@@ -12,8 +12,18 @@ A technical story identifies the current internal friction or risk, the target
 technical state, the behavior boundary to preserve, and the future development
 that becomes simpler. Observable product behavior belongs in a user story.
 
-A story is organized by lifecycle state: `future/`, `current/`, then `past/`.
-Its identifier and filename remain stable when its state changes.
+A story is a durable directory organized by lifecycle state: `future/`,
+`current/`, then `past/`. Its identifier and directory name remain stable when
+its state changes. Every story directory contains:
+
+- `story.md`, the normative intent, criteria, estimate, references, and closure
+  evidence;
+- `collaboration.md`, the shared journal where orchestration, architecture,
+  development, testing, and review leave concise findings for the following
+  phases.
+
+The whole directory moves between lifecycle states. `collaboration.md` is part
+of the story history and must not be deleted after implementation.
 
 The `agents` frontmatter field lists the `name` values of custom Codex agents
 defined under `.codex/agents/` according to the
@@ -32,3 +42,4 @@ Templates:
 
 - [User story](templates/user-story.md)
 - [Technical story](templates/technical-story.md)
+- [Agent collaboration journal](templates/collaboration.md)

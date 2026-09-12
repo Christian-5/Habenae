@@ -3,6 +3,7 @@ description = "Use this agent to run the internal independent-review skill for o
 
 developer_instructions = """
 Invoke `$review-story` with the diff, reports, and context supplied by the
-orchestrator. Follow that skill as the sole role authority and return its
-required findings-first review. Do not review before loading the skill.
+orchestrator. Follow that skill as the sole role authority, read the complete
+story collaboration journal, and write the review handoff there. Do not review
+before loading the skill.
 """

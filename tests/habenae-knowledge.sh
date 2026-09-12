@@ -35,9 +35,33 @@ grep -q "unfinished template" /tmp/habenae-knowledge-out
 rm "$COPY/.codex/agents/broken.toml"
 printf 'unfinished agent template rejected: OK\n'
 
-# A story referencing an unknown agent must be rejected.
-mkdir -p "$COPY/stories/current/user"
-cat > "$COPY/stories/current/user/US-9999-example.md" <<'EOF'
+# A flat story file must be rejected.
+touch "$COPY/stories/current/user/US-9998-flat.md"
+if run >/tmp/habenae-knowledge-out 2>&1; then
+  echo "expected failure for flat story file, got success" >&2
+  exit 1
+fi
+grep -q "stories must be directories" /tmp/habenae-knowledge-out
+rm "$COPY/stories/current/user/US-9998-flat.md"
+printf 'flat story file rejected: OK\n'
+
+# A story directory missing its collaboration journal must be rejected.
+mkdir -p "$COPY/stories/future/user/US-0000-missing-journal"
+cp "$COPY/stories/templates/user-story.md" \
+   "$COPY/stories/future/user/US-0000-missing-journal/story.md"
+if run >/tmp/habenae-knowledge-out 2>&1; then
+  echo "expected failure for missing collaboration journal, got success" >&2
+  exit 1
+fi
+grep -q "missing collaboration.md" /tmp/habenae-knowledge-out
+rm -r "$COPY/stories/future/user/US-0000-missing-journal"
+printf 'missing collaboration journal rejected: OK\n'
+
+# A story directory referencing an unknown agent must be rejected.
+mkdir -p "$COPY/stories/current/user/US-9999-example"
+cp "$COPY/stories/templates/collaboration.md" \
+   "$COPY/stories/current/user/US-9999-example/collaboration.md"
+cat > "$COPY/stories/current/user/US-9999-example/story.md" <<'EOF'
 ---
 id: US-9999
 title: Example
@@ -69,6 +93,7 @@ if run >/tmp/habenae-knowledge-out 2>&1; then
   exit 1
 fi
 grep -q "unknown agent 'does_not_exist'" /tmp/habenae-knowledge-out
+rm -r "$COPY/stories/current/user/US-9999-example"
 printf 'dangling agent reference rejected: OK\n'
 
 # Two ADR files sharing the same numeric prefix (and therefore the same id) must be rejected.

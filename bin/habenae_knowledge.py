@@ -179,14 +179,19 @@ def check_skills(root: Path, report: Report) -> tuple[dict[str, Path], set[str]]
     return skills, internal
 
 
-def _story_files(root: Path):
+def _story_directories(root: Path, report: Report):
     for lifecycle in ("future", "current", "past"):
         for kind, prefix in (("user", "US-"), ("technical", "TS-")):
             directory = root / "stories" / lifecycle / kind
             if not directory.is_dir():
                 continue
             for path in sorted(directory.glob("*.md")):
-                yield lifecycle, prefix, path
+                report.fail(
+                    f"story {path.relative_to(root)}: stories must be directories "
+                    "containing story.md and collaboration.md"
+                )
+            for story_dir in sorted(path for path in directory.iterdir() if path.is_dir()):
+                yield lifecycle, prefix, story_dir
 
 
 def check_stories(root: Path, report: Report, agents: dict, skills: dict, internal: set[str]) -> set[str]:
@@ -195,11 +200,26 @@ def check_stories(root: Path, report: Report, agents: dict, skills: dict, intern
     referenced_skills: set[str] = set()
     count = 0
 
-    for lifecycle, prefix, path in _story_files(root):
+    for lifecycle, prefix, story_dir in _story_directories(root, report):
+        path = story_dir / "story.md"
+        collaboration = story_dir / "collaboration.md"
+        story_rel = story_dir.relative_to(root)
+        count += 1
+
+        if not path.is_file():
+            report.fail(f"story {story_rel}: missing story.md")
+            continue
+        if not collaboration.is_file():
+            report.fail(f"story {story_rel}: missing collaboration.md")
+        else:
+            collaboration_text = collaboration.read_text()
+            for section in ("Orchestration", "Architecture", "Development", "Tests", "Review"):
+                if not re.search(rf"^##\s+{section}\s*$", collaboration_text, re.MULTILINE):
+                    report.fail(f"story {story_rel}: collaboration.md is missing the '{section}' section")
+
         data, body = parse_frontmatter(path.read_text())
         story_id = data.get("id")
         rel = path.relative_to(root)
-        count += 1
 
         if not story_id or not re.fullmatch(rf"{prefix}\d{{4}}", story_id):
             report.fail(f"story {rel}: missing or malformed id (expected {prefix}NNNN)")
@@ -210,8 +230,8 @@ def check_stories(root: Path, report: Report, agents: dict, skills: dict, intern
         else:
             seen_ids[story_id] = path
 
-        if not path.stem.startswith(story_id):
-            report.fail(f"story {rel}: filename does not start with its id '{story_id}'")
+        if not story_dir.name.startswith(story_id):
+            report.fail(f"story {rel}: directory does not start with its id '{story_id}'")
 
         if not re.search(rf"^#\s+{re.escape(story_id)}\b", body, re.MULTILINE):
             report.fail(f"story {rel}: heading does not start with '# {story_id}'")
@@ -250,7 +270,7 @@ def check_stories(root: Path, report: Report, agents: dict, skills: dict, intern
                     report.fail(f"story {rel}: '{field}' entry '{link}' does not resolve to a file")
 
     if count:
-        report.ok(f"stories: {count} file(s) checked, {len(seen_ids)} unique id(s)")
+        report.ok(f"stories: {count} directories checked, {len(seen_ids)} unique id(s)")
     return referenced_agents | referenced_skills
 
 

@@ -47,12 +47,9 @@ Record known product constraints without prescribing an implementation.
 
 - Relevant dependency or step.
 
-## Execution log
+## Collaboration
 
-- Architecture and design:
-- Development:
-- Tests:
-- Review:
+See the durable [agent collaboration journal](collaboration.md).
 
 ## Validation
 

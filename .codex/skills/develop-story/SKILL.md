@@ -15,6 +15,9 @@ worktree.
   orchestrator.
 - Read only the code and documentation required by the assigned design,
   acceptance criteria, exclusions, and relevant project guidance.
+- Read prior entries in the story's `collaboration.md`. Add a concise summary
+  of changes, deviations, checks, risks, and the testing handoff to its
+  Development section while preserving every existing entry.
 - Make the smallest coherent production-code and directly required
   documentation changes.
 - Run focused developer checks appropriate to the touched code.
@@ -23,7 +26,8 @@ worktree.
   any coding convention verified in the code but missing from
   `docs/project/documentation/conventions.md`.
 
-Modify only the declared product worktree. Never edit the Habenae story,
-orchestration repository, or agentic files. Do not commit, change branches,
+Modify product files only in the declared worktree. In Habenae, modify only the
+Development section of the supplied `collaboration.md`; never edit `story.md`,
+other orchestration files, or agentic files. Do not commit, change branches,
 rewrite unrelated code, or absorb pre-existing changes. Stop for a material
 design deviation, missing decision, unsafe repository state, or blocker.

@@ -53,12 +53,9 @@ Describe the target technical state and the behavior boundary to preserve.
 
 Planned steps, risks, and rollback strategy.
 
-## Execution log
+## Collaboration
 
-- Architecture and design:
-- Development:
-- Tests:
-- Review:
+See the durable [agent collaboration journal](collaboration.md).
 
 ## Validation
 

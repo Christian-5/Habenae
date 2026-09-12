@@ -12,8 +12,10 @@ replace the specialist agents or implement the change itself.
 ## Select and qualify the story
 
 1. Read `AGENTS.md`, `PROJECT.md`, and `stories/README.md`.
-2. Resolve the story from an explicit path or identifier. If none is given,
-   select it only when exactly one story exists under `stories/current/`.
+2. Resolve the story directory from an explicit path or identifier, then use its
+   `story.md` as the normative definition and `collaboration.md` as the shared
+   agent journal. If none is given, select it only when exactly one story
+   directory exists under `stories/current/`.
 3. Require `status: current`, a complete intent or technical outcome,
    verifiable acceptance criteria, and an estimate below `13`.
 4. Read only the specifications, project ADRs, skills, and technical
@@ -29,7 +31,8 @@ intent, or implement a story estimated at `13`.
 Delegate the complete execution to the `developer_orchestrator` custom agent.
 Provide a compact context packet containing:
 
-- the absolute story path and identifier;
+- the absolute story-directory, `story.md`, and `collaboration.md` paths, plus
+  the identifier;
 - the linked context paths already qualified;
 - the acceptance criteria and explicit exclusions;
 - the repository, base reference, branch, and worktree fields;
@@ -54,8 +57,9 @@ the story's `story_points` estimate, and to return the final delivery report:
 
 The phases run in order for the applicable tier; no required phase is skipped
 silently, and `code_reviewer` always runs. A specialist may be recalled with a
-narrowly scoped correction. Only the orchestrator updates the Habenae story;
-specialists report their actions and evidence to it.
+narrowly scoped correction. Only the orchestrator updates `story.md` or moves
+the story directory. Specialists may update only their section of
+`collaboration.md` in Habenae and must read earlier sections before working.
 These internal skills are execution details: do not add them to the story's
 `skills` field.
 
@@ -79,10 +83,12 @@ Do not declare the story complete until the orchestrator reports that:
 - appropriate automated checks pass, or each exception is explicit;
 - the review has no unresolved blocking finding;
 - relevant documentation and ADRs are consistent;
-- the story records commands, results, decisions, follow-up debt, and the
-  final product-code commit;
-- the story has moved to `stories/past/` only after all completion conditions
-  are satisfied.
+- `story.md` records commands, results, decisions, follow-up debt, and the final
+  product-code commit;
+- `collaboration.md` contains the applicable phase notes;
+- the complete story directory has moved to `stories/past/` only after all
+  completion conditions are satisfied, without deleting its collaboration
+  journal.
 
 Return the story identifier, worktree and branch, product-code commit, Habenae
 commit, validation summary, review outcome, and any remaining non-blocking

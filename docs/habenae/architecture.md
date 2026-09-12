@@ -30,13 +30,17 @@ A branch can be checked out in only one worktree at a time.
 
 ## Cross-repository traceability
 
-There is no atomic commit across the two repositories. The story provides the
-explicit link and records:
+There is no atomic commit across the two repositories. Each durable story
+directory contains `story.md` for normative state and `collaboration.md` for
+specialist handoffs. Together they record:
 
 - the code repository and branch;
 - the local worktree path;
 - the starting reference;
 - the final change SHA;
 - validation evidence.
+
+The directory moves between `future/`, `current/`, and `past/` as one unit; its
+collaboration journal is never discarded after implementation.
 
 The code must not depend on Habenae to work.

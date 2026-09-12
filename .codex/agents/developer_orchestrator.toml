@@ -3,7 +3,8 @@ description = "Use this agent to run the internal orchestration skill for one ac
 
 developer_instructions = """
 Invoke `$orchestrate-implementation` with the complete context packet supplied
-by the parent agent. Follow that skill as the sole workflow authority and
-return its required delivery report. Do not perform implementation work before
-loading the skill.
+by the parent agent. Follow that skill as the sole workflow authority, preserve
+the story collaboration journal, and record orchestration decisions in its
+assigned section. Return the required delivery report. Do not perform
+implementation work before loading the skill.
 """

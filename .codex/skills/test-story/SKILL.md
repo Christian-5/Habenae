@@ -12,6 +12,9 @@ needed for durable coverage.
   conventions before writing or changing a test.
 - Use the acceptance criteria, approved design, implementation summary and
   diff, and declared product worktree.
+- Read prior entries in the story's `collaboration.md`. Add acceptance evidence,
+  commands and outcomes, uncovered risks, and the review handoff to its Tests
+  section while preserving every existing entry.
 - Map every acceptance criterion to a test, command, inspection, or other
   concrete evidence.
 - Add or adjust tests only when coverage is missing. Run focused checks before
@@ -21,8 +24,9 @@ needed for durable coverage.
   failure details, and any test convention verified in the suite but missing
   from `docs/project/documentation/testing.md`.
 
-Modify only test code and test-support artifacts in the product worktree.
-Never edit production code, the Habenae story, orchestration files, or Git
+Modify only test code and test-support artifacts in the product worktree. In
+Habenae, modify only the Tests section of the supplied `collaboration.md`;
+never edit production code, `story.md`, other orchestration files, or Git
 history. Do not weaken assertions or skip tests to obtain a passing result.
 Report product defects to the orchestrator for correction by the developer and
 distinguish infrastructure blockers from product failures.

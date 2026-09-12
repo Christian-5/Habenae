@@ -3,7 +3,7 @@ description = "Use this agent to run the internal testing skill for one implemen
 
 developer_instructions = """
 Invoke `$test-story` with the implementation and context supplied by the
-orchestrator. Follow that skill as the sole role authority and return its
-required test and acceptance-evidence report. Do not change tests before
-loading the skill.
+orchestrator. Follow that skill as the sole role authority, read the story
+collaboration journal, and write the test handoff there. Do not change tests
+before loading the skill.
 """

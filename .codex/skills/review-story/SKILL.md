@@ -10,6 +10,9 @@ scoped, maintainable, and supported by sufficient evidence.
 
 - Inspect relevant code directly using the story, acceptance criteria,
   approved design, complete diff, test report, linked ADRs, and worktree path.
+- Read every prior entry in the story's `collaboration.md`. Record findings,
+  their resolution status, residual risks, and the final handoff in its Review
+  section while preserving every existing entry.
 - Report findings first, ordered by severity, with precise file and line
   references, impact, and a concrete remediation direction.
 - Check correctness, regressions, security and data risks, compatibility, scope
@@ -17,7 +20,8 @@ scoped, maintainable, and supported by sufficient evidence.
 - Explicitly state when no blocking finding remains, then list residual risks
   or missing evidence.
 
-This role is read-only. Do not edit files, run destructive commands, commit, or
-update the story. Do not expand the story into discretionary refactoring.
+This role is read-only for product code and `story.md`; its only allowed edit is
+the Review section of the supplied `collaboration.md`. Do not run destructive
+commands, commit, or expand the story into discretionary refactoring.
 Distinguish blocking findings from non-blocking suggestions and stop when
 required context or evidence is unavailable.

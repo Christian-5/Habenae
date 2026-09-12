@@ -11,8 +11,9 @@ begins.
 ## Load only the required context
 
 1. Read `AGENTS.md`, then `PROJECT.md`.
-2. Read `stories/README.md` and `stories/templates/user-story.md`.
-3. Search story identifiers and titles across `stories/future/`,
+2. Read `stories/README.md`, `stories/templates/user-story.md`, and
+   `stories/templates/collaboration.md`.
+3. Search story identifiers and titles recursively across `stories/future/`,
    `stories/current/`, and `stories/past/` to detect the next identifier and
    possible duplicates.
 4. Read only specifications or decisions directly relevant to the expressed
@@ -67,16 +68,19 @@ For a new story:
 
 1. Allocate the next unused `US-####` identifier across every lifecycle
    directory.
-2. Use a short lowercase hyphenated slug in the filename.
-3. Copy the repository template and populate every relevant field.
-4. Default to `stories/future/user/` and `status: future`. Use
+2. Create a directory named `US-####-short-lowercase-slug`.
+3. Copy the user-story template to `<story-directory>/story.md`, populate every
+   relevant field, and copy the collaboration template to
+   `<story-directory>/collaboration.md`.
+4. Default the directory to `stories/future/user/` and `status: future`. Use
    `stories/current/user/` only when the user explicitly accepts or starts the
    work.
 5. Leave code repository, branch, worktree, and commit fields `null`; those are
    execution references populated later.
 
-When refining an existing story, preserve its identifier and lifecycle. Change
-only fields supported by the request or necessary for internal consistency.
+When refining an existing story, preserve its identifier, directory name,
+lifecycle, and collaboration journal. Change only fields supported by the
+request or necessary for internal consistency.
 
 Do not invent specifications, ADRs, agents, or skills. Link only resources that
 exist and are materially relevant.
@@ -85,7 +89,8 @@ exist and are materially relevant.
 
 Before finishing, verify that:
 
-- the identifier is unique and matches the heading and filename;
+- the identifier is unique and matches the heading and story-directory name;
+- the directory contains both `story.md` and `collaboration.md`;
 - frontmatter dates and lifecycle status are consistent;
 - the Intent, Description, Acceptance criteria, Out of scope, and Estimation
   sections contain no template placeholders;
@@ -93,5 +98,5 @@ Before finishing, verify that:
 - the story-point value uses the documented scale and has a rationale;
 - no file under `product/` changed.
 
-Return the story path, its identifier, its estimate, and any assumptions or
-open decisions. Do not begin implementation.
+Return the story-directory path, `story.md` path, identifier, estimate, and any
+assumptions or open decisions. Do not begin implementation.

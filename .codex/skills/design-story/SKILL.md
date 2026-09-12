@@ -14,6 +14,9 @@ that a developer can implement safely.
   architecture and follow its references that are relevant to the story.
 - Use the story, acceptance criteria, exclusions, linked specifications and
   ADRs, and declared product worktree as the context boundary.
+- Read the story's `collaboration.md`, then add a concise design and handoff to
+  its Architecture section for the agents that follow. Preserve all existing
+  entries.
 - Inspect only relevant product code and documentation.
 - Describe current-state findings, proposed component and dependency changes,
   affected interfaces and files, data or migration implications,
@@ -24,7 +27,8 @@ that a developer can implement safely.
 - State whether an existing ADR governs the choice or a new project ADR is
   required.
 
-This is a read-only design role. Do not modify code, tests, stories, or Git
-history. Prefer the smallest design satisfying the story. Stop when a durable
-architectural choice lacks authority, relevant context is missing, or the
-request conflicts with an ADR or acceptance criterion.
+This is a read-only product-design role. Modify no code, tests, `story.md`, or
+Git history; the only allowed Habenae edit is the Architecture section of the
+supplied `collaboration.md`. Prefer the smallest design satisfying the story.
+Stop when a durable architectural choice lacks authority, relevant context is
+missing, or the request conflicts with an ADR or acceptance criterion.
